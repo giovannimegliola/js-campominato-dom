@@ -47,7 +47,7 @@ button{
   background-color: aquamarine;
 }
 
-.bomb {
-  background-color: red;
 
+.bomb-clicked {
+  background-color: red; 
 }

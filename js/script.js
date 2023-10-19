@@ -25,9 +25,16 @@ btn.addEventListener('click', function() {
 
   for (let i = 1; i <= numCell; i++) {
     let cell = drawCell(i,numCell);
-    if (bombs.includes(i)) {
-      cell.classList.add('bomb');
-    }
+
+    cell.addEventListener('click', function() {
+      if (bombs.includes(i)) {
+        cell.classList.add('bomb-clicked'); // Hai preso una bomba, colora la cella di rosso
+        endGame('Hai perso! hai preso una bomba'); // Termina la partita
+      } else {
+        cell.classList.add('active'); // Cella cliccata correttamente, colorala di azzurro
+      }
+    });
+
     playground.append(cell);
   }
 });
@@ -60,4 +67,12 @@ function drawCell(cellNumber,numCell) {
     console.log('hai cliccato la cella:' + cellNumber);
   });
   return cell;
+}
+
+
+
+// funzione messaggio di fine partita
+
+function endGame(message) {
+  alert(message); 
 }
