@@ -2,6 +2,8 @@ const btn = document.querySelector('button');
 const difficultySelect = document.getElementById('levels');
 const playground = document.getElementById('playground');
 
+let coveredCells; // celle coperte prima di essere cliccate
+
 btn.addEventListener('click', function() {
   let numCell;
 
@@ -18,10 +20,16 @@ btn.addEventListener('click', function() {
   }
 
   const bombCount = 16;
+
+  const bombs = generateBombs (numCell, bombCount);
   
   playground.innerHTML = ''; //reset
 
-  const bombs = generateBombs (numCell, bombCount);
+  let coveredCells = numCell - bombCount;
+
+  let score = 0;
+
+  //const bombs = generateBombs (numCell, bombCount);
 
   for (let i = 1; i <= numCell; i++) {
     let cell = drawCell(i,numCell);
@@ -29,9 +37,14 @@ btn.addEventListener('click', function() {
     cell.addEventListener('click', function() {
       if (bombs.includes(i)) {
         cell.classList.add('bomb-clicked'); // Hai preso una bomba, colora la cella di rosso
-        endGame('Hai perso! hai preso una bomba'); // Termina la partita
+        endGame('Hai perso! hai preso una bomba. Il tuo punteggio è :' + score); // Termina la partita e mostra punteggio
       } else {
         cell.classList.add('active'); // Cella cliccata correttamente, colorala di azzurro
+        coveredCells--;
+        score++; //incrementa il punteggio in caso di casella azzurra
+        if (coveredCells === 0) {
+          endGame('Hai vinto! Il tuo punteggio è ; ' + score); // Tutte le celle non bomba sono state rivelate, il giocatore ha vinto
+        }
       }
     });
 
