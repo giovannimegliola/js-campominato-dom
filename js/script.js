@@ -1,5 +1,6 @@
 const btn = document.querySelector('button');
 const difficultySelect = document.getElementById('levels');
+const playground = document.getElementById('playground');
 
 btn.addEventListener('click', function() {
   let numCell;
@@ -16,16 +17,38 @@ btn.addEventListener('click', function() {
     numCell = 49;
   }
 
-  const playground = document.getElementById('playground');
+  const bombCount = 16;
+  
   playground.innerHTML = ''; //reset
+
+  const bombs = generateBombs (numCell, bombCount);
 
   for (let i = 1; i <= numCell; i++) {
     let cell = drawCell(i,numCell);
+    if (bombs.includes(i)) {
+      cell.classList.add('bomb');
+    }
     playground.append(cell);
   }
 });
 
+
+// funzione per la generazione delle bombe
+
+function generateBombs(numCell, bombCount) {
+  const bombs = [];
+  while (bombs.length < bombCount) {
+    const bombLocation = Math.floor(Math.random() * numCell) + 1;
+    if (!bombs.includes(bombLocation)) {
+      bombs.push(bombLocation);
+    }
+  }
+  return bombs;
+}
+
+
 // funzione per disegnare le celle nella griglia 10x10
+
 function drawCell(cellNumber,numCell) {
   const cellWidth = Math.sqrt(numCell);
   const cell = document.createElement('div');

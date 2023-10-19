@@ -46,3 +46,8 @@ button{
 .active{
   background-color: aquamarine;
 }
+
+.bomb {
+  background-color: red;
+
+}
