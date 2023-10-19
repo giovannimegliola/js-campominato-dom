@@ -93,5 +93,11 @@ function drawCell(cellNumber,numCell) {
 // funzione messaggio di fine partita
 
 function endGame(message) {
+  const bombCells = document.querySelectorAll('.bomb-clicked'); // Seleziona tutte le celle rosse
+
+  for (let i = 0; i < bombCells.length; i++) {
+    const cell = bombCells[i];
+    cell.innerHTML = '<i class="fa fa-bomb fa-beat"></i>'; // Aggiungi l'icona della bomba
+  }
   alert(message); 
 }
