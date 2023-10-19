@@ -13,11 +13,25 @@
   flex-wrap: wrap;
 }
 
+h1{
+  text-align: center;
+  margin: 30px;
+}
+
 button{
   margin: 30px auto;
   padding: 5px 10px;
   display: block;
   cursor: pointer;
+}
+
+
+.selection {
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .cell{
